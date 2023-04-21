@@ -1,0 +1,109 @@
+# Pixel : It is the smallest unit in a digital display
+	{pix -> picture , el -> element}
+
+# Opengl : it is a cross platform, hardware accelerating, language independent, industrial standard API for producing 2D and 3D graphics.
+    -> consists of 3 set of libraries:
+    	1. GL : (core openGL) consists of 100 of commands
+    	2. GLU : opengl utility library
+    	3. GLUT : opengl utility toolkit
+    	
+# Resolution (WxH) : it is the number of pixels that appear from top to bottom and left to right.
+1. Image resolution : spacing between the pixels {density of the pixels in the image}
+2. screen resolution : number of distinct pixels
+
+# PPI (pixels per inch) 
+
+# Aspect ratio : W/H (Number of pixels horizontally to the number of pixels vertically)
+
+# Frame buffer : intensity value of the images we want to display is stored in this memory area { FB = Resolution x bits per pixel}
+
+_______________________________________
+
+# Antialiasing : it is the technique used in computer graphics to remove the aliasing effect.
+	-> The aliasing effect is the appearance of jagged edges in the rasterized image. {image rendered using pixels}
+	-> jagged edges occurs due to distortion of the image when scan conversion is done at low frequency {undersampling}.
+
+
+# scan display : it is a technique used for producing images on the screen.
+
+1. Vector scan display : beam is directed to the area on the screen where the picture is to be drawn.
+			-> display buffer memory : contains the commands for point or line drawing along with the (x,y) coordinates.
+			-> need to refresh atleast 30-60 times per second i.e. 30-60 fps
+		=> higher resolution than raster scan display
+		=> produces smooth line
+		=> need less memory to store picture definition
+	# can't draw realistic images
+	# max 4 colors only
+	# depends how deep the beam penetrates
+
+2. Raster scan display :  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________________
+
+22/03/2023
+
+# 2D transformation:
+Transformation means a change in either position or size or shape or orientation of any graphical object.
+
+-> Representation of points:
+A point is represented in 2D by its coordinates, these two values are specified as the elements of a one row, two column matrix
+
+-> Transformation and matrixes:
+  [A] [T] = [B]
+  => [T] = [A]-1 [B]   {geometric operator matrix}
+  
+	-> Types of transformation in 2D graphics:
+	1. Translation 
+	2. Scaling
+	3. Rotation
+	4. Reflection
+	5. Shearing
+
+
+________________________________________________________
+
+
+-> When a general 2 x 2 matrix is used to generate a pair of intersecting lines then the result is also a pair of intersecting lines.
+
+
+If a solution to this pair of equation exists then the line intersect, if not then they are parallel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+

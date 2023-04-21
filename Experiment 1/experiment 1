@@ -1,0 +1,101 @@
+
+                                    # EXPERIMENT 1
+
+
+# OPENGL
+a. OpenGL is a graphics API (Application Programming Interface) used for creating 2D and 3D graphics in various applications
+b. Provides functions for creating and manipulating graphics, such as drawing shapes and textures, applying lighting and shading effects, and transforming objects in 3D space
+c. Cross-platform and widely supported on different operating systems and hardware platforms
+d. Can take advantage of dedicated graphics hardware for high performance and quality
+e. Constantly evolving with new versions and extensions to support the latest graphics features and hardware capabilities
+f. Popular choice in the graphics industry for creating high-quality, cross-platform graphics applications.
+
+
+# GLU & GLUT
+GLU: OpenGL Utility Library
+a. Provides utility functions not included in core OpenGL API
+b. Functions for creating and manipulating 3D objects, coordinate transformations, tessellation
+c. It was a part of the official OpenGL specification in the past, now considered legacy and not included in modern OpenGL versions
+
+GLUT: OpenGL Utility Toolkit
+a. Free, open-source library
+b. Provides utility functions for creating simple OpenGL applications and tools for creating windows, handling user input, drawing basic shapes, handling animation
+c. Commonly used for rapid prototyping and in introductory OpenGL tutorials and courses
+d. Usage has decreased in recent years due to introduction of newer, more modern graphics APIs and libraries.
+
+
+# OpenGL architecture
+Here are the key points about the architecture of OpenGL in notes form:
+a. The architecture of OpenGL is based on a client-server model.
+b. The client is the graphics application, which makes calls to the OpenGL API to create and manipulate graphics.
+c. The server is the graphics driver, which communicates with the graphics hardware to perform the requested graphics operations.
+d. The graphics driver provides an abstraction layer between the graphics application and the hardware, allowing the application to be written in a platform-independent manner.
+e. The graphics pipeline in OpenGL consists of several stages, including vertex processing, primitive assembly, rasterization, fragment processing, and output merging.
+f. Each stage of the pipeline is performed by a set of programmable or fixed-function units that perform specific operations on the graphics data.
+g. The pipeline is highly configurable, allowing developers to customize the behavior of each stage and optimize performance for specific hardware configurations.
+h. OpenGL also provides a set of state variables that control the behavior of the graphics pipeline, such as the current color, texture, and transformation matrices.
+i. State changes can be expensive, so it is important to minimize the number of state changes and use batched rendering techniques to maximize performance.
+
+
+# Setting up the environment
+Setting up OpenGL in Linux typically involves the following steps:
+a. Install the OpenGL libraries and dependencies: Open the terminal and install the OpenGL libraries and dependencies using your Linux distribution's package manager.
+    {sudo apt-get install mesa-utils freeglut3-dev}
+
+b. Choose a programming language: Choose a programming language that you want to use for your OpenGL development. C and C++ are common choices for OpenGL .
+
+c. Install a text editor or Integrated Development Environment (IDE): Install a text editor or IDE for your chosen programming language like codeblocks.
+
+d. Write and compile a simple OpenGL program: Write a simple OpenGL program using your chosen text editor or IDE and run it.
+    {Compile : g++ myprogram.cpp -lGL -lglut -o myprogram}
+    {Run : ./myprogram}
+
+
+
+# First OpenGL program 
+
+include <GL/glut.h>
+void display()
+{
+    glClear(GL_COLOR_BUFFER_BIT);    
+    glLoadIdentity(); 
+    glFlush(); 
+    glutSwapBuffers();
+
+}
+
+void init()
+{
+    glClearColor(1,0,0,0);   
+}
+int main(int argc, char ** argv)
+{
+    glutInit(&argc, argv);
+    glutInitWindowSize(600,500);
+    glutInitWindowPosition(500,100);
+    glutCreateWindow("Line Program");
+    glutDisplayFunc(display);
+    init();
+    glutMainLoop();  
+}
+
+It displays a window of Red Color 
+
+
+# Difference between C & OpenGL
+Key Differences between C & OpenGL are:
+a. C is a programming language used for creating software applications and system software, while OpenGL is an API (Application Programming Interface) used for creating and manipulating 2D and 3D graphics.
+b. C is a low-level language that provides a high degree of control over the hardware, while OpenGL is a high-level API that abstracts away many of the low-level details of graphics programming.
+c. C is a procedural language that uses functions and control structures to organize code, while OpenGL is based on a state machine architecture that uses state variables to control the behavior of the graphics pipeline.
+d. C provides built-in support for basic data types like integers, floats, and characters, while OpenGL provides support for graphics-specific data types like vertices, textures, and matrices.
+e. C programs can be compiled and executed directly on a computer, while OpenGL programs typically require the use of a graphics driver and hardware acceleration to render graphics.
+f. C is a general-purpose language that can be used for many different types of programming, while OpenGL is a specialized API for graphics programming that is best suited for developers with a specific interest in graphics programming.
+g. C code can be written and compiled on any operating system, while OpenGL is cross-platform and can be used on many different platforms, including Windows, Linux, macOS, and mobile devices.
+h. C code can be used with a wide variety of libraries and frameworks to provide additional functionality, while OpenGL can be used as a standalone API for graphics programming.
+j. C is often used for developing applications like text editors, databases, and operating systems, while OpenGL is used for developing graphics-intensive applications like video games, scientific visualizations, and CAD/CAM software.
+k. C code is typically more efficient than OpenGL code due to its low-level nature, but OpenGL code is often easier to write and maintain due to its high-level abstractions.
+l. To use OpenGL in a C program, you will need to include the appropriate OpenGL headers and link to the OpenGL library, which provides the necessary functions for creating and manipulating graphics.
+
+
+
+_____________________________________________________________________________________________________________
