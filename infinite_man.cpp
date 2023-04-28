@@ -3,6 +3,12 @@
 # include <math.h>
 using namespace std;
 
+int man_y = 100, ob_x = 500;
+int pos = 0;
+int flag = 0;
+int jump = 0;
+bool mouse = false;
+float t = 100;
 
 void circle(int xc,int yc,int r)
 {
@@ -35,7 +41,7 @@ void circle(int xc,int yc,int r)
         }
     }
     glEnd();
-    glFlush();
+    // glFlush();
 }
 
 void drawLine(int x1, int y1, int x2, int y2)
@@ -44,46 +50,86 @@ void drawLine(int x1, int y1, int x2, int y2)
         glVertex2f(x1,y1);
         glVertex2f(x2,y2);
     glEnd();
-    glFlush();
+    // glFlush();
 }
 
 
 // obstacle
-void obstacle()
+void obstacle(int x, int y)
 {
-    drawLine(0,0, 0,50);
-    drawLine(0,10, -25,30);
-    drawLine(0,10, 25,30);
+    drawLine(x, y, x, 50);
+    drawLine(x, y+10, x-20, y+30);
+    drawLine(x, y+10, x+20, y+30);
 
-    drawLine(0, 30, -10,40);
-    drawLine(0, 30, 10,40);
+    drawLine(x, y+30, x-10, y+40);
+    drawLine(x, y+30, x+10, y+40);
 }
 
 // man
-void man()
+void man(int x, int y, int pos)
 {
     // head
-    circle(-70, 100, 20);
+    circle(x, y, 20);
 
     // body
-    drawLine(-70,80, -70,30);
+    drawLine(x,y-20, x, y-70);
 
-    // legs
-    drawLine(-70,30, -90, 0);
-    drawLine(-70,30, -50, 0);
+    if(pos == 0)
+    {
+        // arms
+        drawLine(x, y-20, x-20, y-50);
+        drawLine(x, y-20, x+20, y-50);
+        
+        // legs
+        drawLine(x , y-70, x-20, y-100);
+        drawLine(x , y-70, x+20, y-100);
+    }
+    else if (pos == 1)
+    {
+        drawLine(x, y-20, x-15, y-50);
+        drawLine(x, y-20, x+15, y-50);
+        drawLine(x, y-70, x-10, y-100);
+        drawLine(x, y-70, x+10, y-100);
+    }
+    else if (pos == 2)
+    {
+        drawLine(x, y-20, x-10, y-50);
+        drawLine(x, y-20, x+10, y-50);
+        drawLine(x , y-70, x-5, y-100);
+        drawLine(x , y-70, x+5, y-100);
+    }
+    else if (pos == 3)
+    {
+        drawLine(x, y-20, x-5, y-50);
+        drawLine(x, y-20, x+5, y-50);
+        drawLine(x , y-70, x, y-100);
+        drawLine(x , y-70, x, y-100);
+    }
+    else if (pos == 4)
+    {
+        drawLine(x, y-20, x-10, y-50);
+        drawLine(x, y-20, x+10, y-50);
+        drawLine(x , y-70, x-5, y-100);
+        drawLine(x , y-70, x+5, y-100);
+    }
+    else if(pos == 5)
+    {
 
-    // arms
-    drawLine(-70, 80, -90,50);
-    drawLine(-70, 80, -50,50);
+        drawLine(x, y-20, x-15, y-50);
+        drawLine(x, y-20, x+15, y-50);
+        drawLine(x , y-70, x-10, y-100);
+        drawLine(x , y-70, x+10, y-100);
+    }
 }
-
-
 
 void display()
 {
+    // path
+    glClear(GL_COLOR_BUFFER_BIT);
     drawLine(-500,0, 500,0);
-    obstacle();
-    man();
+    obstacle(ob_x,0);
+    man(-70,man_y,pos);
+    glFlush();
 
 }
 
@@ -97,6 +143,63 @@ void init(void)
     glMatrixMode(GL_MODELVIEW);  
 }
 
+void timer(int)
+{
+    glutPostRedisplay();
+    glutTimerFunc(t,timer,0);   // it will re-run the timer function after a particular time
+    if(ob_x > -500)
+    {
+        ob_x = ob_x - 10;
+    }else{
+        ob_x = 500;
+    }
+
+    if(flag == 0)
+    {
+        man_y = 100;
+    }
+
+    if(flag == 1)
+    {
+        if(jump <= 7)
+        {
+            man_y += 12;
+            pos = 0;
+            jump ++;
+        }
+        else if(jump <= 15)
+        {
+            man_y -= 12;
+            pos = 0;
+            jump ++;
+        }  
+        if(jump == 16)
+        {
+            mouse = false;
+            flag = 0;
+            // if((ob_x+20) < -90)
+            // {
+            //     glutLeaveMainLoop();  // exits the window
+            // }
+        }
+    }
+    else{
+        pos = (pos+1) % 6;
+    }
+}
+
+void onClick(int button, int state, int x, int y)
+{
+    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && mouse == false)
+    {
+        flag = 1;
+        jump = 0;
+        mouse = true;
+        if(t > 10)
+            t -= 10;
+    }
+}
+
 int main(int argc, char ** argv)
 {
     glutInit(&argc, argv);
@@ -104,6 +207,8 @@ int main(int argc, char ** argv)
     glutCreateWindow("THE GAME");
     init();
     glutDisplayFunc(display);
+    glutMouseFunc(onClick);
+    glutTimerFunc(0,timer,0);
     glutMainLoop();
     return 0;
 }
